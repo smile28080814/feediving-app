@@ -1519,15 +1519,12 @@ export default function App() {
     { id:"aida2", label:"AIDA 2", color:"#3eb8f0" },
     { id:"aida3", label:"AIDA 3", color:"#9b5ce0" },
     { id:"mock",  label:"📝 모의고사", color:"#e08e5c" },
-    { id:"ai",    label:"🤖 AI 튜터", color:"#5ce09a" },
   ];
 
   const chapters = tab==="aida2" ? AIDA2_CHAPTERS : AIDA3_CHAPTERS;
 
   const renderContent = () => {
     if (view==="learn" && activeChapter) return <LearnScreen ch={activeChapter} onBack={()=>{ setView("list"); setActiveChapter(null); }}/>;
-
-    if (tab==="ai") return <AiTutor />;
 
     if (tab==="mock") {
       if (view==="mock-quiz" && mockLevel) {
@@ -1648,16 +1645,9 @@ export default function App() {
           {tabs.map(t => (
             <button key={t.id} onClick={()=>{ setTab(t.id); setView("list"); setActiveChapter(null); setMockLevel(null); }}
               style={{
-                flex:1, padding:"9px 2px", borderRadius:10, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, transition:"all 0.2s",
-                background: tab===t.id ? (
-                  t.id==="aida2" ? "linear-gradient(135deg,#1a4a68,#1d3a5c)" :
-                  t.id==="aida3" ? "linear-gradient(135deg,#3d1a68,#2d1a5c)" :
-                  t.id==="mock"  ? "linear-gradient(135deg,#68401a,#5c341a)" :
-                                   "linear-gradient(135deg,#1a6840,#1a5c34)"
-                ) : "transparent",
-                color: tab===t.id ? (
-                  t.id==="aida2"?"#3eb8f0":t.id==="aida3"?"#b47ce0":t.id==="mock"?"#e0a05c":"#5ce09a"
-                ) : COLORS.muted,
+                flex:1, padding:"10px 4px", borderRadius:10, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, transition:"all 0.2s",
+                background: tab===t.id ? (t.id==="aida2"?"linear-gradient(135deg,#1a4a68,#1d3a5c)":t.id==="aida3"?"linear-gradient(135deg,#3d1a68,#2d1a5c)":"linear-gradient(135deg,#68401a,#5c341a)") : "transparent",
+                color: tab===t.id ? (t.id==="aida2"?"#3eb8f0":t.id==="aida3"?"#b47ce0":"#e0a05c") : COLORS.muted,
                 boxShadow: tab===t.id ? "0 2px 8px rgba(0,0,0,0.3)" : "none",
               }}>
               {t.label}
